@@ -42,7 +42,7 @@ async function runTest() {
     });
 
     // Navigate the browser to the "hello world!" web-site.
-    await driver.get('https://demo.applitools.com/index_v2.html');
+    await driver.get('https://demo.applitools.com');
 
     //⭐️To see visual bugs, change the above URL to:
     //  https://demo.applitools.com/index_v2.html and run the test again

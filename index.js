@@ -59,17 +59,13 @@ async function runTest() {
     // End the test.
     const results = await eyes.close(); // will return only first TestResults, but as we have two browsers, we need more results
 
-    console.log(
-      `Please wait, we are ..
-      1. Uploading the app's resources (html, css, images)
-      2. Uploading the screenshot
-      3. Analyzing them using our A.I. 
-
-      ...you should see the result in ~30 seconds depending on your internet speed and how heavy your app is.
-    `)
+    console.log( `Please wait...`)
     console.log(results); // eslint-disable-line
   } catch (e) {
     console.log(e);
+
+    // Close the browser.
+    await driver.quit();
   } finally {
     // Close the browser.
     await driver.quit();

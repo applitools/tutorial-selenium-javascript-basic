@@ -1,24 +1,15 @@
 'use strict';
 
-//Import chromedriver
-require('chromedriver'); // eslint-disable-line node/no-unpublished-require
+// Import chromedriver
+require('chromedriver');
 
-//Import Selenium Webdriver
-const {
-  Builder,
-  Capabilities,
-  By
-} = require('selenium-webdriver');
+// Import Selenium Webdriver
+const { Builder, Capabilities, By } = require('selenium-webdriver');
 
-//Import Applitools SDK and relevant methods
-const {
-  Eyes,
-  Target
-} = require('@applitools/eyes-selenium');
+// Import Applitools SDK and relevant methods
+const { Eyes, Target } = require('@applitools/eyes-selenium');
 
-
-async function runTest() {
-
+(async () => {
   // Open a Chrome browser.
   const driver = new Builder()
     .withCapabilities(Capabilities.chrome())
@@ -27,15 +18,11 @@ async function runTest() {
   // Initialize the eyes SDK and set your private API key.
   const eyes = new Eyes();
 
-  //Add your API key
-  eyes.setApiKey('APPLITOOLS_API_KEY'); //👈🏼 REPLACE ME!
-
-  //scroll the entire page
-  eyes.setForceFullPageScreenshot(true);
+  // Add your API key
+  eyes.setApiKey('{APPLITOOLS_API_KEY}'); // 👈🏼 REPLACE ME!
 
   try {
-
-    // Start the test and set the, App name, Test name and the browser's viewport size to 800x600.
+    // Start the test and set the App name, the Test name and the browser's viewport size to 800x600.
     await eyes.open(driver, 'Demo App', 'My first Javascript test!', {
       width: 800,
       height: 600
@@ -44,28 +31,32 @@ async function runTest() {
     // Navigate the browser to the "hello world!" web-site.
     await driver.get('https://demo.applitools.com');
 
-    //⭐️To see visual bugs, change the above URL to:
-    //  https://demo.applitools.com/index_v2.html and run the test again
+    // ⭐️To see visual bugs, change the above URL to:
+    // https://demo.applitools.com/index_v2.html and run the test again
 
     // Visual checkpoint #1.
-    await eyes.check('Login Page', Target.window());
+    await eyes.check('Login Page', Target.window().fully());
 
     // Click the "Click me!" button.
     await driver.findElement(By.id('log-in')).click();
 
     // Visual checkpoint #2.
-    await eyes.check('Click!', Target.window());
+    await eyes.check('Click!', Target.window().fully());
 
     // End the test.
-    const results = await eyes.close(); // will return only first TestResults, but as we have two browsers, we need more results
+    const results = await eyes.close();
 
-    console.log( `Please wait...`)
-    console.log(results); // eslint-disable-line
+    console.log(results);
   } catch (e) {
-    console.log(e);
+    // In case of visual mismatch, you will go here
+    console.error(e);
 
-    // Close the browser.
-    await driver.quit();
+    // If you need test results here, you can use `eyes.close(false)` and then we will not throw an error
+
+    // Or, you get them from an error object
+    // if (e instanceof TestFailedError) {
+    //   const results = e.getTestResults();
+    // }
   } finally {
     // Close the browser.
     await driver.quit();
@@ -73,7 +64,4 @@ async function runTest() {
     // If the test was aborted before eyes.close was called ends the test as aborted.
     await eyes.abortIfNotClosed();
   }
-}
-
-//Run
-runTest();
+})();

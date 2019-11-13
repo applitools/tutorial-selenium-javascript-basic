@@ -14,11 +14,11 @@
   "bugs": {
     "url": "https://github.com/applitools/tutorial-selenium-javascript-basic/issues"
   },
-  "dependencies": {
+  "devDependencies": {
     "mocha": "^6.2.2",
-    "chromedriver": "^78.0.1",
-    "@applitools/eyes-selenium": "^4.31.9",
-    "selenium-webdriver": "^4.0.0-alpha.4"
+    "@applitools/eyes-selenium": "^4.31.17",
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "chromedriver": "^78.0.1"
   },
   "scripts": {
     "test": "mocha --no-timeouts \"test/*.test.js\""

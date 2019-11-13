@@ -9,12 +9,12 @@ describe('BasicDemo', function () {
 
   before(() => {
     batch = new BatchInfo('Demo batch');
+
+    // Initialize the Runner for your test.
+    runner = new ClassicRunner();
   });
 
   beforeEach(async () => {
-    // Initialize the Runner for your test.
-    runner = new ClassicRunner();
-
     // Initialize the eyes SDK
     eyes = new Eyes(runner);
 

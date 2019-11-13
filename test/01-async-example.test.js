@@ -10,12 +10,12 @@ describe('AsyncDemo', function () {
 
   before(() => {
     batch = new BatchInfo('Demo batch');
+
+    // Initialize the Runner for your test.
+    runner = new ClassicRunner();
   });
 
   beforeEach(async () => {
-    // Initialize the Runner for your test.
-    runner = new ClassicRunner();
-
     // Initialize the eyes SDK
     eyes = new Eyes(runner);
 
@@ -62,7 +62,9 @@ describe('AsyncDemo', function () {
 
     // If the test was aborted before eyes.close was called, ends the test as aborted.
     await eyes.abortIfNotClosed();
+  });
 
+  after(async () => {
     // Wait and collect all test results
     const allTestResults = await runner.getAllTestResults();
     console.log(allTestResults);

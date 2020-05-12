@@ -1,8 +1,7 @@
 'use strict';
 
-require('chromedriver');
 const { Builder, By } = require('selenium-webdriver');
-const { Eyes, ClassicRunner, Target, RectangleSize } = require('@applitools/eyes-selenium');
+const { Eyes, ClassicRunner, Target, RectangleSize, Configuration, BatchInfo} = require('@applitools/eyes-selenium');
 
 describe('DemoApp - ClassicRunner', function () {
   let runner, eyes, driver;
@@ -14,6 +13,18 @@ describe('DemoApp - ClassicRunner', function () {
     // Initialize the eyes SDK (IMPORTANT: make sure your API key is set in the APPLITOOLS_API_KEY env variable).
     eyes = new Eyes(runner);
 
+    // Initialize the eyes configuration.
+    let conf = new Configuration()
+
+    // You can get your api key from the Applitools dashboard
+    conf.setApiKey('APPLITOOLS_API_KEY')
+
+    // set new batch
+    conf.setBatch(new BatchInfo("Demo batch"));
+
+    // set the configuration to eyes
+    eyes.setConfiguration(conf)
+
     // Use Chrome browser
     driver = await new Builder()
       .forBrowser('chrome')
@@ -23,15 +34,16 @@ describe('DemoApp - ClassicRunner', function () {
 
   it('Smoke Test', async () => {
     // Start the test by setting AUT's name, test name and viewport size (width X height)
-    await eyes.open(driver, 'DemoApp - ClassicRunner', 'Smoke Test', new RectangleSize(600, 800));
+    await eyes.open(driver, 'Demo App', 'Smoke Test', new RectangleSize(800, 600));
 
     // Navigate the browser to the "ACME" demo app.
     await driver.get("https://demo.applitools.com");
+
+    // To see visual bugs after the first run, use the commented line belowe instead.
     // await driver.get("https://demo.applitools.com/index_v2.html");
-    // To see visual bugs after the first run, use the commented line above instead.
 
     // Visual checkpoint #1 - Check the login page.
-    await eyes.check("Login Window", Target.window());
+    await eyes.check("Login Window", Target.window().fully());
 
     // This will create a test with two test steps.
     await driver.findElement(By.id("log-in")).click();

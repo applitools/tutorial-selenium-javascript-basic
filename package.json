@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "mocha": "^6.2.2",
-    "chromedriver": "^78.0.1",
-    "@applitools/eyes-selenium": "^4.31.9",
-    "selenium-webdriver": "^4.0.0-alpha.4"
+    "chromedriver": "latest",
+    "@applitools/eyes-selenium": "latest",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "scripts": {
     "test": "mocha --no-timeouts \"test/*.test.js\""

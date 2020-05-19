@@ -39,7 +39,7 @@ describe('DemoApp - ClassicRunner', function () {
     // Navigate the browser to the "ACME" demo app.
     await driver.get("https://demo.applitools.com");
 
-    // To see visual bugs after the first run, use the commented line belowe instead.
+    // To see visual bugs after the first run, use the commented line below instead.
     // await driver.get("https://demo.applitools.com/index_v2.html");
 
     // Visual checkpoint #1 - Check the login page.

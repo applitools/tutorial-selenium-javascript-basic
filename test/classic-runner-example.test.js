@@ -6,15 +6,24 @@ const { Eyes, ClassicRunner, Target, RectangleSize, Configuration, BatchInfo} = 
 describe('DemoApp - ClassicRunner', function () {
   let runner, eyes, driver;
 
-  beforeEach(async () => {
+  before(async () => {
+
+    // Use Chrome browser
+    driver = await new Builder()
+        .forBrowser('chrome')
+        .build();
+
     // Initialize the Runner for your test.
     runner = new ClassicRunner();
 
-    // Initialize the eyes SDK (IMPORTANT: make sure your API key is set in the APPLITOOLS_API_KEY env variable).
+    // Initialize the eyes SDK
     eyes = new Eyes(runner);
 
     // Initialize the eyes configuration.
     let conf = new Configuration()
+
+    // Add this configuration if your tested page includes fixed elements.
+    //config.setStitchMode(StitchMode.CSS);
 
     // You can get your api key from the Applitools dashboard
     conf.setApiKey('APPLITOOLS_API_KEY')
@@ -25,15 +34,12 @@ describe('DemoApp - ClassicRunner', function () {
     // set the configuration to eyes
     eyes.setConfiguration(conf)
 
-    // Use Chrome browser
-    driver = await new Builder()
-      .forBrowser('chrome')
-      // .setChromeOptions(new ChromeOptions().headless())
-      .build();
   });
 
   it('Smoke Test', async () => {
-    // Start the test by setting AUT's name, test name and viewport size (width X height)
+    // Set AUT's name, test name and viewport size (width X height)
+    // We have set it to 800 x 600 to accommodate various screens. Feel free to
+    // change it.
     await eyes.open(driver, 'Demo App', 'Smoke Test', new RectangleSize(800, 600));
 
     // Navigate the browser to the "ACME" demo app.
@@ -42,7 +48,8 @@ describe('DemoApp - ClassicRunner', function () {
     // To see visual bugs after the first run, use the commented line below instead.
     // await driver.get("https://demo.applitools.com/index_v2.html");
 
-    // Visual checkpoint #1 - Check the login page.
+    // Visual checkpoint #1 - Check the login page. using the fluent API
+    // https://applitools.com/docs/topics/sdk/the-eyes-sdk-check-fluent-api.html?Highlight=fluent%20api
     await eyes.check("Login Window", Target.window().fully());
 
     // This will create a test with two test steps.
@@ -55,7 +62,7 @@ describe('DemoApp - ClassicRunner', function () {
     await eyes.closeAsync();
   });
 
-  afterEach(async () => {
+  after(async () => {
     // Close the browser.
     await driver.quit();
 

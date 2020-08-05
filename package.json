@@ -15,9 +15,9 @@
     "url": "https://github.com/applitools/tutorial-selenium-javascript-basic/issues"
   },
   "dependencies": {
-    "mocha": "^6.2.2",
-    "chromedriver": "latest",
     "@applitools/eyes-selenium": "latest",
+    "chromedriver": "latest",
+    "mocha": "^8.0.1",
     "selenium-webdriver": "latest"
   },
   "scripts": {

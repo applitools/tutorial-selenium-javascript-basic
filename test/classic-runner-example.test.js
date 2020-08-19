@@ -17,7 +17,7 @@ describe('DemoApp - ClassicRunner', function () {
     let conf = new Configuration()
 
     // You can get your api key from the Applitools dashboard
-    conf.setApiKey('APPLITOOLS_API_KEY')
+    // conf.setApiKey('APPLITOOLS_API_KEY')
 
     // set new batch
     conf.setBatch(new BatchInfo("Demo batch"));
@@ -46,13 +46,13 @@ describe('DemoApp - ClassicRunner', function () {
     await eyes.check("Login Window", Target.window().fully());
 
     // This will create a test with two test steps.
-    await driver.findElement(By.id("log-in")).click();
+    // await driver.findElement(By.id("log-in")).click();
 
     // Visual checkpoint #2 - Check the app page.
-    await eyes.check("App Window", Target.window().fully());
+    // await eyes.check("App Window", Target.window().fully());
 
     // End the test.
-    await eyes.closeAsync();
+    await eyes.close();
   });
 
   afterEach(async () => {
@@ -60,10 +60,10 @@ describe('DemoApp - ClassicRunner', function () {
     await driver.quit();
 
     // If the test was aborted before eyes.close was called, ends the test as aborted.
-    await eyes.abortIfNotClosed();
+    await eyes.abort();
 
     // Wait and collect all test results
-    const allTestResults = await runner.getAllTestResults();
+    const allTestResults = await runner.getAllTestResults(false);
     console.log(allTestResults);
   });
 });

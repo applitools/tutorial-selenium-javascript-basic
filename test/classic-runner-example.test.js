@@ -16,9 +16,6 @@ describe('DemoApp - ClassicRunner', function () {
     // Initialize the eyes configuration.
     let conf = new Configuration()
 
-    // You can get your api key from the Applitools dashboard
-    // conf.setApiKey('APPLITOOLS_API_KEY')
-
     // set new batch
     conf.setBatch(new BatchInfo("Demo batch"));
 

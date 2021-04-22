@@ -15,10 +15,9 @@
     "url": "https://github.com/applitools/tutorial-selenium-javascript-basic/issues"
   },
   "dependencies": {
-    "@applitools/eyes-selenium": "latest",
-    "chromedriver": "latest",
-    "mocha": "^8.0.1",
-    "selenium-webdriver": "latest"
+    "@applitools/eyes-selenium": "^4.53.0",
+    "mocha": "^8.3.2",
+    "selenium-webdriver": "^4.0.0-beta.3"
   },
   "scripts": {
     "test": "mocha --no-timeouts \"test/*.test.js\""

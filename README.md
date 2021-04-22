@@ -1,6 +1,6 @@
 # Applitools Tutorial - Selenium JavaScript
 
-Get started with Applitools Eyes visual testing with this example of using the Selenium JavaScript and the [Eyes Selenium JavaScript SDK](https://www.npmjs.com/package/@applitools/eyes-selenium).
+Get started with Applitools Eyes visual testing with this example of using Selenium JavaScript and the [Eyes Selenium JavaScript SDK](https://www.npmjs.com/package/@applitools/eyes-selenium).
 
 Learn more about how to install and start this project with our [Selenium JavaScript tutorial](https://applitools.com/tutorials/selenium-javascript.html)!
 

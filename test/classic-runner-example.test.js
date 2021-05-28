@@ -1,6 +1,7 @@
 'use strict';
 
 const { Builder, By } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
 const { Eyes, ClassicRunner, Target, RectangleSize, Configuration, BatchInfo} = require('@applitools/eyes-selenium');
 
 describe('DemoApp - ClassicRunner', function () {
@@ -23,9 +24,12 @@ describe('DemoApp - ClassicRunner', function () {
     eyes.setConfiguration(conf)
 
     // Use Chrome browser
+    const options = new chrome.Options();
+    if (process.env.CI === 'true') options.headless();
+
     driver = await new Builder()
       .forBrowser('chrome')
-      // .setChromeOptions(new ChromeOptions().headless())
+      .setChromeOptions(options)
       .build();
   });
 

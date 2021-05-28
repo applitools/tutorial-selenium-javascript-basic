@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-      - run: npm install chromedriver
+      - run: npm install chromedriver --detect_chromedriver_version
 
       - run: npm run test
         env:

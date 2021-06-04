@@ -25,7 +25,7 @@ jobs:
       - name: Install Updates
         run: npm install --legacy-peer-deps
 
-      - run: npm install chromedriver --detect_chromedriver_version
+      - run: npm install chromedriver --detect_chromedriver_version --no-save
 
       - run: npm test
         env:
